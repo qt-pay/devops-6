@@ -1,0 +1,104 @@
+1. 安装python, 设置python及pip环境变量
+2. user目录下新建pip/pip.ini文件：
+[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+[install]
+trusted-host=mirrors.aliyun.com	
+3. 安装Django
+pip3 install Django -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+4. 创建 Django 项目
+ django-admin.py startproject djangobase
+5. 启动服务
+python manage.py runserver
+python3 manage.py runserver 0.0.0.0:8000
+
+6.创建应用
+python manage.py startapp 应用名:
+django-admin.py startapp TestModel
+
+7.运行项目
+python3 manage.py runserver
+python3 manage.py runserver 0.0.0.0:8000
+
+
+8.DB
+create database runoob default charset=utf8;
+# 创建表结构
+3
+app01  # 让 Django 知道我们在我们的模型有一些变更
+python manage.py makemigrations 
+# 创建表结构 app01
+python manage.py migrate    
+
+python manage.py createsuperuser 来创建超级用户
+
+SETUP in linux :
+1. 修改ALLOWED_HOSTS，['*']，可以让任何IP访问
+2.在项目文件里创建 uwsgi.ini 文件
+#添加配置选择
+[uwsgi]
+#配置和nginx连接的socket连接
+socket=127.0.0.1:8997
+#配置项目路径，项目的所在目录
+chdir=/home/github/devops/
+#配置wsgi接口模块文件路径,也就是wsgi.py这个文件所在的目录名
+wsgi-file=devops/wsgi.py
+#配置启动的进程数
+processes=4
+#配置每个进程的线程数
+threads=2
+#配置启动管理主进程
+master=True
+#配置存放主进程的进程号文件
+pidfile=uwsgi.pid
+#配置dump日志记录
+daemonize=uwsgi.log
+
+让文件生效：uwsgi  --ini  uwsgi.ini
+重新加载 uwsgi --reload uwsgi.pid
+
+3. nginx.conf 
+server {
+        listen 80;
+        server_name  127.0.0.1; #改为自己的域名，没域名修改为127.0.0.1:80
+        charset utf-8;
+        location / {
+           include uwsgi_params;
+           uwsgi_pass 127.0.0.1:8999;  #端口要和uwsgi里配置的一样
+           uwsgi_param UWSGI_SCRIPT devops.wsgi;  #wsgi.py所在的目录名+.wsgi
+           uwsgi_param UWSGI_CHDIR /home/github/devops/; #项目路径
+           
+        }
+        location /static/ {
+        alias /data/wwwroot/mysite/static/; #静态资源路径
+        }
+    }
+或者宝塔nginx配置：
+ location / {
+       include uwsgi_params;
+       uwsgi_pass 127.0.0.1:8999;  #端口要和uwsgi里配置的一样
+       uwsgi_param UWSGI_SCRIPT devops.wsgi;  #wsgi.py所在的目录名+.wsgi
+       uwsgi_param UWSGI_CHDIR /home/github/devops; #项目路径
+    }
+      location /static/ {
+      alias /home/github/devops/static/; #静态资源路径
+ }
+4. pip freeze > requirements.txt
+Python项目管理插件里添加项目，端口要和uwsgi.ini里面的那个端口一致
+后台样式不显示的时：
+ STATIC_ROOT  = os.path.join(BASE_DIR, 'static')#指定样式收集目录
+python manage.py collectstatic
+
+9.win10 下面： pip3 install Pillow==6.2.1
+
+10. 安装simplieui
+1. pip install django-simpleui
+2. 用pip或者源码方式安装simpleui后，在自己项目的settings.py文件中INSTALLED_APPS的第一行加入'simpleui',
+
+11.django-import-export插件使用教程
+pip install django-import-export
+'import_export',
+class MoneyAdmin(ImportExportActionModelAdmin):
+
+

@@ -1,0 +1,13 @@
+from django.contrib import admin
+
+# Register your models here.
+from trade.models import SiteMap
+from trade.views import siteMapview
+
+'''
+SiteMap
+'''
+@admin.register(SiteMap)
+class SiteMapAdmin(admin.ModelAdmin):
+    def changelist_view(self, request, extra_context=None):
+        return siteMapview(request)
