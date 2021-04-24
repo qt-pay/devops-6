@@ -24,4 +24,8 @@ urlpatterns = [
     path('', admin.site.urls),
     url(r'^search/$', views.search),
     url(r'^search-post/$', views.search_post),
+    url(r'apitest/(?P<ID>.*)$', views.api_post),
+    # url(r'^bind', deviceapi.device_bind),
+
+
 ]

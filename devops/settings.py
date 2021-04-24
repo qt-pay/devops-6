@@ -43,13 +43,14 @@ INSTALLED_APPS = [
     'app.apps.AppConfig',
     'trade.apps.TradeConfig',
     'quant.apps.QuantConfig',
+    'hisconsole.apps.HisconsoleConfig',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -89,8 +90,8 @@ DATABASES = {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'django',    #你的数据库名称
             'USER': 'django',   #你的数据库用户名
-            'PASSWORD': 'xxxxx', #你的数据库密码
-            'HOST': '8.129.115.xxx', #你的数据库主机，留空默认为localhost
+            'PASSWORD': '982128', #你的数据库密码
+            'HOST': '8.129.115.98', #你的数据库主机，留空默认为localhost
             # 'HOST': '192.168.31.85',  # 你的数据库主机，留空默认为localhost
             'PORT': 3306, # 端口
      }

@@ -1,7 +1,10 @@
+import json
+
 import pymysql
 from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
+from urllib import request as apirequest
 
 from lib.Common import get_stock_data
 from lib.mysql import get_connection
@@ -64,12 +67,30 @@ def search_post(request):
 # 接收POST请求数据
 def api_post(request,ID):
     message = {}
+
+    if request.method == "POST":
+        message['type'] = "This is Post"
+        # req = json.loads(request.body)
+
+    elif request.method == "GET":
+        message['type'] = "This is GET"
+
+
     try:
         print("ID", ID)
         message['code'] = 200
         message['message'] = "ID is {}".format(ID)
-        return JsonResponse(message)
+
+        url = 'https://www.bitstamp.net/api/ticker/'
+        req = apirequest.Request(url)
+        rsp = apirequest.urlopen(req)
+        res = rsp.read()
+        res_json = json.loads(res)
+        message['res_json'] = res_json
+        responseJson =  JsonResponse(message)
     except Exception as e:
         message['code'] = 444
         message['message'] = "更新失败"
-        return JsonResponse(message)
+        responseJson =  JsonResponse(message)
+
+    return responseJson

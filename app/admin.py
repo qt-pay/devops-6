@@ -41,7 +41,7 @@ class TodoAdmin(admin.ModelAdmin):
     # search_fields = ('todo',)
     list_filter = ('project','pior','plantime',CheckedListFilter)
     list_display_links = ('id',)
-    # list_editable = ('project','pior','plantime')
+    list_editable = ('project','pior','plantime')
     ordering = ('pior','plantime',)
     list_per_page = 20
 
@@ -83,12 +83,9 @@ Jenkins 监控管理
 '''
 @admin.register(Jenkins)
 class JenkinsAdmin(admin.ModelAdmin):
-    list_display = ('name','image_data','duration','updateddate','description','link_job','exec_job','post_job')
+    list_display = ('name','image_data','duration','updateddate','description','link_job','exec_job')
     list_per_page = 50
     readonly_fields = ('image_data',)
-
-    class Media:
-        js = ('/admin/js/admin/devicemode.js',)
 
     #屏蔽增加按钮
     def has_add_permission(self, request):
@@ -106,12 +103,12 @@ class JenkinsAdmin(admin.ModelAdmin):
     def changelist_view(self, request, extra_context=None):
         #refresh data
         refreshJenkins()
-        if 'action' in request.POST and request.POST.get('action') == 'refresh':
-            if not request.POST.getlist(ACTION_CHECKBOX_NAME):
-                post = request.POST.copy()
-                for u in Jenkins.objects.all():
-                    post.update({ACTION_CHECKBOX_NAME: str(u.id)})
-                request._set_post(post)
+        # if 'action' in request.POST and request.POST.get('action') == 'refresh':
+        #     if not request.POST.getlist(ACTION_CHECKBOX_NAME):
+        #         post = request.POST.copy()
+        #         for u in Jenkins.objects.all():
+        #             post.update({ACTION_CHECKBOX_NAME: str(u.id)})
+        #         request._set_post(post)
         return super(JenkinsAdmin, self).changelist_view(request, extra_context)
 
     # 增加自定义按钮
