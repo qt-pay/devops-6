@@ -9,7 +9,7 @@ Devops TODO 系统
 '''
 class Todo(models.Model):
     todo = models.CharField(verbose_name='IDEA', max_length=128)
-    description = models.CharField(verbose_name='描述', max_length=500, blank=True, null=True)
+    description = models.TextField(verbose_name='描述',  blank=True, null=True)
     project = models.ForeignKey('Project',verbose_name='项目', on_delete=models.CASCADE, blank=True, null=True)
     pior = models.ForeignKey('Pior',verbose_name='优先级', on_delete=models.CASCADE, blank=True, null=True)
     link = models.CharField(verbose_name='link', max_length=500, blank=True, null=True)
@@ -102,7 +102,7 @@ Jenkins 监控管理
 class Jenkins(models.Model):
     name = models.CharField(verbose_name='JOB名称', max_length=128)
     joburl = models.CharField(verbose_name='JOB Url', max_length=250,blank=True, null=True)
-    description = models.CharField(verbose_name='描述', max_length=250, blank=True, null=True)
+    description = models.TextField(verbose_name='描述', blank=True, null=True)
     color = models.CharField(verbose_name='图标状态', max_length=25,blank=True, null=True)
     inQueue = models.BooleanField(verbose_name='排队中', default=False, null=True)
     number = models.IntegerField(verbose_name='构建ID',blank=True, null=True)

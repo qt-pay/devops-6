@@ -102,3 +102,10 @@ pip install django-import-export
 class MoneyAdmin(ImportExportActionModelAdmin):
 
 
+12. Channel
+https://channels.readthedocs.io/en/stable/installation.html
+channels_redis
+python -m pip install -U channels
+redis:redis-server.exe redis.windows.conf
+
+

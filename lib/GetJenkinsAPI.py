@@ -3,7 +3,8 @@ from urllib import request
 import json
 
 def get_jobs_data():
-    url = 'http://192.168.31.85:9001/api/json?tree=jobs[name,url,description,inQueue,color,lastBuild[number,building,duration,estimatedDuration,result,url]]'
+    # url = 'http://192.168.31.85:9001/api/json?tree=jobs[name,url,description,inQueue,color,lastBuild[number,building,duration,estimatedDuration,result,url]]'
+    url = 'http://10f918h251.zicp.vip:28156/api/json?tree=jobs[name,url,description,inQueue,color,lastBuild[number,building,duration,estimatedDuration,result,url]]'
     req = request.Request(url)
     rsp = request.urlopen(req)
     res = rsp.read()

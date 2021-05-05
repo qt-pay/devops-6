@@ -37,7 +37,7 @@ class CheckedListFilter(admin.SimpleListFilter):
 
 @admin.register(Todo)
 class TodoAdmin(admin.ModelAdmin):
-    list_display = ('id','image_data','todo','description','link_url','pior','project','plantime')
+    list_display = ('id','image_data','todo','pior','plantime','project','description','link_url')
     # search_fields = ('todo',)
     list_filter = ('project','pior','plantime',CheckedListFilter)
     list_display_links = ('id',)

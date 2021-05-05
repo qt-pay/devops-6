@@ -13,6 +13,8 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+from devops.password import dbpassword
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -43,7 +45,8 @@ INSTALLED_APPS = [
     'app.apps.AppConfig',
     'trade.apps.TradeConfig',
     'quant.apps.QuantConfig',
-    'hisconsole.apps.HisconsoleConfig',
+    # 'hisconsole.apps.HisconsoleConfig',
+    # 'channels',
 ]
 
 MIDDLEWARE = [
@@ -76,7 +79,16 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'devops.wsgi.application'
+# ASGI_APPLICATION = "devops.asgi.application"
 
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             "hosts": [('127.0.0.1', 6379)],
+#         },
+#     },
+# }
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -90,6 +102,8 @@ DATABASES = {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'django',    #你的数据库名称
             'USER': 'django',   #你的数据库用户名
+            'PASSWORD': dbpassword, #你的数据库密码
+            'HOST': '8.129.115.98', #你的数据库主机，留空默认为localhost
             # 'HOST': '192.168.31.85',  # 你的数据库主机，留空默认为localhost
             'PORT': 3306, # 端口
      }

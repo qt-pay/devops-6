@@ -8,5 +8,5 @@ def get_time():
 
 
 def get_connection():
-    conn = pymysql.connect, db="django", charset='utf8')
+    conn = pymysql.connect(host="8.129.115.98", user="django", passwd="982128", db="django", charset='utf8')
     return conn

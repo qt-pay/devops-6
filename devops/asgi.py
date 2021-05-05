@@ -14,3 +14,23 @@ from django.core.asgi import get_asgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'devops.settings')
 
 application = get_asgi_application()
+
+
+# # mysite/asgi.py
+# import os
+#
+# from channels.auth import AuthMiddlewareStack
+# from channels.routing import ProtocolTypeRouter, URLRouter
+# from django.core.asgi import get_asgi_application
+# import hisconsole.routing
+#
+# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "devops.settings")
+#
+# application = ProtocolTypeRouter({
+#   "http": get_asgi_application(),
+#   "websocket": AuthMiddlewareStack(
+#         URLRouter(
+#             hisconsole.routing.websocket_urlpatterns
+#         )
+#     ),
+# })

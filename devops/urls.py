@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from app import views
 
@@ -25,7 +25,5 @@ urlpatterns = [
     url(r'^search/$', views.search),
     url(r'^search-post/$', views.search_post),
     url(r'apitest/(?P<ID>.*)$', views.api_post),
-    # url(r'^bind', deviceapi.device_bind),
-
 
 ]
